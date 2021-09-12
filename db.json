@@ -1,0 +1,24 @@
+{
+  "contacts": [
+    {
+      "id": "8ecfcda0-a3be-4d89-b3c2-f1a34464f3f2",
+      "name": "Jon Wolker",
+      "number": "09654231"
+    },
+    {
+      "id": "b74aa635-5d73-4642-ae17-c2349752c0d0",
+      "name": "Alina",
+      "number": "09654231"
+    },
+    {
+      "id": "3032dc0d-fb1f-4f3a-8c30-feb81d41452d",
+      "name": "Алина",
+      "number": "09654231"
+    },
+    {
+      "id": "abaa2353-62c6-4c2e-b83f-69d29f97d06b",
+      "name": "Sasha",
+      "number": "09654231"
+    }
+  ]
+}
