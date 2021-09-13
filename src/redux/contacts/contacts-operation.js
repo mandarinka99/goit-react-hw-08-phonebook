@@ -1,35 +1,51 @@
-import axios from 'axios';
-import { createContactsError, createContactsRequest, createContactsSuccess, deleteContactError, deleteContactRequest, deleteContactSuccess, getContactsError, getContactsRequest, getContactsSuccess } from './contacts-actions';
-import { v4 as uuidv4 } from 'uuid';
+import axios from "axios";
+import {
+  createContactsError,
+  createContactsRequest,
+  createContactsSuccess,
+  deleteContactError,
+  deleteContactRequest,
+  deleteContactSuccess,
+  editContactError,
+  editContactRequest,
+  editContactSuccess,
+  getContactsError,
+  getContactsRequest,
+  getContactsSuccess,
+} from "./contacts-actions";
+import { v4 as uuidv4 } from "uuid";
 
-export const getContacts = () => async dispatch => {
+export const getContacts = () => async (dispatch) => {
   dispatch(getContactsRequest());
   try {
-    const { data } = await axios.get('/contacts');
+    const { data } = await axios.get("/contacts");
     dispatch(getContactsSuccess(data));
   } catch (error) {
     dispatch(getContactsError(error));
   }
 };
 
-export const deleteContact = contactId => dispatch => {
+export const deleteContact = (contactId) => (dispatch) => {
   dispatch(deleteContactRequest());
 
   axios
     .delete(`/contacts/${contactId}`)
     .then(() => dispatch(deleteContactSuccess(contactId)))
-    .catch(error => dispatch(deleteContactError(error)));
+    .catch((error) => dispatch(deleteContactError(error)));
 };
 
-export const createContact = ({name, number}) => dispatch => {
+export const editContact = (contactId, patchedContact) => (dispatch) => {
+  dispatch(editContactRequest());
+  axios
+    .patch(`/contacts/${contactId}`, patchedContact)
+    .then((res) => dispatch(editContactSuccess(res.data)))
+    .catch((error) => dispatch(editContactError(error)));
+};
+
+export const createContact = (contact) => (dispatch) => {
   dispatch(createContactsRequest());
-  const contact = {
-    id: uuidv4(),
-    name,
-    number,
-  }
   axios
     .post(`/contacts`, contact)
-    .then(() => dispatch(createContactsSuccess(contact)))
-    .catch(error => dispatch(createContactsError(error)));
+    .then((res) => dispatch(createContactsSuccess(res.data)))
+    .catch((error) => dispatch(createContactsError(error)));
 };
