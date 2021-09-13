@@ -1,31 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense, lazy } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router";
-import ContactsPage from "../pages/ContactsPage";
-import LoginPage from "../pages/LoginPage";
-import RegisterPage from "../pages/RegisterPage";
+import { Switch } from "react-router-dom";
 import AppBar from "./appBar/AppBar";
 import Container from "./container/Container";
-import authOperations from '../redux/auth/auth-operations';
+import authOperations from "../redux/auth/auth-operations";
+import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
+import Spiner from "./spiner/Spiner";
+
+const RegisterPage = lazy(() => import("../pages/RegisterPage"));
+const LoginPage = lazy(() => import("../pages/LoginPage"));
+const ContactsPage = lazy(() => import("../pages/RegisterPage"));
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(authOperations.fetchCurrentUser())
-  }, [dispatch])
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
+
   return (
     <Container>
-      <AppBar/>
+      <AppBar />
 
       <Switch>
-      <Route exact path="/register" component={RegisterPage}/>
-      <Route exact path="/login" component={LoginPage}/>
-      <Route exact path="/contacts" component={ContactsPage}/>
-
+        <Suspense fallback={<Spiner />}>
+          <PublicRoute exact path="/register" restricted>
+            <RegisterPage />
+          </PublicRoute>
+          <PublicRoute exact path="/login" restricted>
+            <LoginPage />
+          </PublicRoute>
+          <PrivateRoute path="/contacts">
+            <ContactsPage />
+          </PrivateRoute>
+        </Suspense>
       </Switch>
-      </Container>
+    </Container>
   );
-}
+};
 
 export default App;
-
