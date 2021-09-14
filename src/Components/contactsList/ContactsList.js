@@ -31,6 +31,7 @@ const ContactsList = () => {
 
   return (
     <div>
+      <h2>Contacts</h2>
       <ul className={s.list}>
         {filteredContacts.map((contact) => (
           <li className={s.item} key={contact.id}>

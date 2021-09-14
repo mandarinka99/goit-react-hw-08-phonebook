@@ -23,7 +23,7 @@ const App = () => {
 
   return (
     !isFetching && (
-      <Container>
+      <>
         <AppBar />
 
         <Switch>
@@ -44,7 +44,7 @@ const App = () => {
             </PrivateRoute>
           </Suspense>
         </Switch>
-      </Container>
+      </>
     )
   );
 };

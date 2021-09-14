@@ -1,0 +1,26 @@
+.userMenu {
+  padding: 15px 100px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: baseline;
+}
+
+.menuBut {
+  display: block;
+  padding: 12px;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: inherit;
+  color: #000000;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.menuBut:hover {
+  color: #132380;
+  border-color: #132380;
+}

@@ -18,7 +18,8 @@ import {
 
 const items = createReducer([], {
   [createContactsSuccess]: (state, { payload }) => [...state, payload],
-  [createContactsSuccess]: (state, { payload }) => [...state, payload],
+  [editContactSuccess]: (state, { payload }) =>
+    state.map((contact) => (contact.id === payload.id ? payload : contact)),
   [getContactsSuccess]: (_, { payload }) => [...payload],
   [deleteContactSuccess]: (state, { payload }) =>
     state.filter((contact) => contact.id !== payload),

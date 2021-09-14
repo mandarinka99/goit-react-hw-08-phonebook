@@ -23,11 +23,6 @@ const EditContactModal = ({ handleClose, contact: initialState }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const find = contacts.find(
-      (newContact) =>
-        newContact.name.toLowerCase() === contact.name.toLowerCase()
-    );
-    if (find) return alert(`${contact.name} is already in contacts`);
     dispatch(
       editContact(contact.id, {
         name: contact.name,
