@@ -64,7 +64,13 @@ const CreateContactForm = () => {
           className={s.formInp}
         />
 
-        <Button type="submit" color="primary" size="small" variant="outlined">
+        <Button
+          type="submit"
+          color="primary"
+          size="small"
+          variant="outlined"
+          className={s.formBtn}
+        >
           ADD CONTACT
         </Button>
       </form>

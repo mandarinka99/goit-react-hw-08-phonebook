@@ -13,7 +13,6 @@ import {
   getContactsRequest,
   getContactsSuccess,
 } from "./contacts-actions";
-import { v4 as uuidv4 } from "uuid";
 
 export const getContacts = () => async (dispatch) => {
   dispatch(getContactsRequest());

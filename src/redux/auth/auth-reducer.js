@@ -1,42 +1,67 @@
 import { createSlice } from "@reduxjs/toolkit";
-import authOperations from "./auth-operations";
+import { register, logIn, logOut, fetchCurrentUser } from "./auth-operations";
 
 const initialState = {
   user: { name: null, email: null },
   token: null,
   isLoggedIn: false,
   isFetching: false,
+  loading: false,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   extraReducers: {
-    [authOperations.register.fulfilled](state, action) {
+    [register.pending](state) {
+      state.loading = true;
+    },
+    [register.fulfilled](state, action) {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
+      state.loading = false;
     },
-    [authOperations.logIn.fulfilled](state, action) {
+    [register.rejected](state) {
+      state.loading = false;
+    },
+    [logIn.pending](state) {
+      state.loading = true;
+    },
+    [logIn.fulfilled](state, action) {
       state.user = action.payload.user;
       state.token = action.payload.token;
       state.isLoggedIn = true;
+      state.loading = false;
     },
-    [authOperations.logOut.fulfilled](state) {
+    [logIn.rejected](state) {
+      state.loading = false;
+    },
+    [logOut.pending](state) {
+      state.loading = true;
+    },
+    [logOut.fulfilled](state) {
       state.user = { name: null, email: null };
       state.token = null;
       state.isLoggedIn = false;
+      state.loading = false;
     },
-    [authOperations.fetchCurrentUser.pending](state) {
+    [logOut.rejected](state) {
+      state.loading = false;
+    },
+    [fetchCurrentUser.pending](state) {
       state.isFetching = true;
+      state.loading = true;
     },
-    [authOperations.fetchCurrentUser.fulfilled](state, action) {
+    [fetchCurrentUser.fulfilled](state, action) {
       state.user = action.payload;
       state.isLoggedIn = true;
       state.isFetching = false;
+      state.loading = false;
     },
-    [authOperations.fetchCurrentUser.rejected](state) {
+    [fetchCurrentUser.rejected](state) {
       state.isFetching = false;
+      state.loading = false;
     },
   },
 });

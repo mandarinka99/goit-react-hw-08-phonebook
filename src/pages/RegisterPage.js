@@ -1,7 +1,7 @@
 import { Button, Container, TextField } from "@material-ui/core";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import authOperations from "../redux/auth/auth-operations";
+import { register } from "../redux/auth/auth-operations";
 import s from "./Pages.module.css";
 
 const RegisterPage = () => {
@@ -25,7 +25,7 @@ const RegisterPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(authOperations.register({ name, email, password }));
+    dispatch(register({ name, email, password }));
     setName("");
     setEmail("");
     setPassword("");

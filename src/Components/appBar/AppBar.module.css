@@ -1,5 +1,6 @@
 .header {
   margin: 0 auto;
-  background-color: rgb(238, 190, 196);
+  border-bottom: 3px solid rgb(221, 112, 124);
+  background-color: rgb(241, 224, 226);
   height: 85px;
 }

@@ -6,7 +6,7 @@ import {
   deleteContact,
 } from "../../redux/contacts/contacts-operation";
 import { useEffect, useState } from "react";
-import { Button } from "@material-ui/core";
+import { Button, ListItem, ListItemText } from "@material-ui/core";
 import EditContactModal from "../editConnactModal/EditContactModal";
 
 const ContactsList = () => {
@@ -31,16 +31,20 @@ const ContactsList = () => {
 
   return (
     <div>
-      <h2>Contacts</h2>
+      <h2 className={s.item}>Your contacts</h2>
       <ul className={s.list}>
         {filteredContacts.map((contact) => (
-          <li className={s.item} key={contact.id}>
-            {contact.name} {contact.number}{" "}
+          <ListItem button key={contact.id} className={s.listItem}>
+            <ListItemText
+              primary={`${contact.name} ${contact.number}`}
+              className={s.itemText}
+            />
             <Button
               variant="outlined"
               color="primary"
               onClick={() => handleClickOpen(contact)}
               size="small"
+              className={s.btn}
             >
               Edit
             </Button>
@@ -52,7 +56,7 @@ const ContactsList = () => {
             >
               Delete
             </Button>
-          </li>
+          </ListItem>
         ))}
       </ul>
       {open && <EditContactModal handleClose={handleClose} contact={contact} />}
