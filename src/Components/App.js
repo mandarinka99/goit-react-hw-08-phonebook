@@ -7,6 +7,7 @@ import PublicRoute from "./PublicRoute";
 import Spiner from "./spiner/Spiner";
 import { getIsFetching } from "../redux/auth/auth-selectors";
 import { fetchCurrentUser } from "../redux/auth/auth-operations";
+import HomePage from "../pages/HomePage";
 
 const RegisterPage = lazy(() => import("../pages/RegisterPage"));
 const LoginPage = lazy(() => import("../pages/LoginPage"));
@@ -41,6 +42,9 @@ const App = () => {
             <PrivateRoute path="/contacts" redirectTo="/login">
               <ContactsPage />
             </PrivateRoute>
+            <PublicRoute exact path="/">
+              <HomePage />
+            </PublicRoute>
           </Suspense>
         </Switch>
       </>
