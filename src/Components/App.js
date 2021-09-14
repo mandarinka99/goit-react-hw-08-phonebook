@@ -42,7 +42,7 @@ const App = () => {
             <PrivateRoute path="/contacts" redirectTo="/login">
               <ContactsPage />
             </PrivateRoute>
-            <PublicRoute exact path="/">
+            <PublicRoute exact path="/" restricted redirectTo="/contacts">
               <HomePage />
             </PublicRoute>
           </Suspense>
